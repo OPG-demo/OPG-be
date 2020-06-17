@@ -25,5 +25,6 @@ server.get('/', (req, res) =>{
 
 server.get('/users', db.getUsers)
 server.get('/users/:id', db.getUserById)
+server.post('/users', db.createUser)
 
 module.exports = server
