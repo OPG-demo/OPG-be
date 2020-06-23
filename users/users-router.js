@@ -38,7 +38,7 @@ router.post('/login', (req, res) =>{
       })
 });
 
-router.get('/', Restricted, (req, res) =>{
+router.get('/user', Restricted, (req, res) =>{
   Users.find()
     .then(user =>{
       res.status(200).json(user)
@@ -48,7 +48,7 @@ router.get('/', Restricted, (req, res) =>{
     })
 });
 
-router.get('/:id', (req, res) =>{
+router.get('/user/:id', (req, res) =>{
   Users.findById(req.params.id)
     .then(user =>{
       if (user) {
@@ -62,7 +62,7 @@ router.get('/:id', (req, res) =>{
     })
 })
 
-router.put('/:id', (req, res) =>{
+router.put('/user/:id', (req, res) =>{
   Users.update(req.body, req.params.id)
   .then(user =>{
     if (user) {
@@ -76,7 +76,7 @@ router.put('/:id', (req, res) =>{
   })
 })
 
-router.delete('/:id', (req, res) =>{
+router.delete('/user/:id', (req, res) =>{
   Users.remove(req.params.id)
   .then(user =>{
     if (user) {
