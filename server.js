@@ -4,10 +4,12 @@ const cors = require('cors')
 const dotenv = require('dotenv')
 const bodyParser = require('body-parser')
 
+const UserRouter = require('./users/users-router')
+
 const server = express()
 dotenv.config();
 
-const db = require('./queries')
+const db = require('./queries/UserQueries')
 
 server.use(bodyParser.json())
 server.use(
@@ -19,12 +21,10 @@ server.use(helmet())
 server.use(express.json())
 server.use(cors())
 
+server.use('/users', UserRouter)
+
 server.get('/', (req, res) =>{
   res.status(200).json({message: "We're connected!"})
 })
-
-server.get('/users', db.getUsers)
-server.get('/users/:id', db.getUserById)
-server.post('/users', db.createUser)
 
 module.exports = server

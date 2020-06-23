@@ -1,0 +1,12 @@
+const express = require('express')
+const userQueries = require('../queries/UserQueries.js')
+const router = express.Router()
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
+const secrets = require('../config/secrets.js')
+
+router.get('/', db.getUsers)
+router.get('/:id', db.getUserById)
+router.post('/', db.createUser)
+router.put('/:id', db.updateUser)
+router.delete('/:id', db.deleteUser)
