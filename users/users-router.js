@@ -76,7 +76,7 @@ router.put('/:id', (req, res) =>{
   })
 })
 
-router.delete('/:id', Restricted, (req, res) =>{
+router.delete('/:id', (req, res) =>{
   Users.remove(req.params.id)
   .then(user =>{
     if (user) {
@@ -95,11 +95,10 @@ router.delete('/:id', Restricted, (req, res) =>{
 function generateToken(user){
   const payload ={
     username: user.username,
-    subject: user.id,
-    department: user.department
+    id: user.id
   };
   const options ={
-    expiresIn: "8h"
+    expiresIn: "12h"
   };
   return jwt.sign(payload, secrets.jwtSecret, options);
 }

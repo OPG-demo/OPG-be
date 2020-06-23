@@ -9,7 +9,6 @@ const UserRouter = require('./users/users-router')
 const server = express()
 dotenv.config();
 
-const db = require('./queries/UserQueries')
 
 server.use(bodyParser.json())
 server.use(
