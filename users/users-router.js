@@ -27,8 +27,7 @@ router.post('/login', (req, res) =>{
       .then(user =>{
         if (user && bcrypt.compareSync(pwdhash, user.pwdhash)){
           const token = generateToken(user);
-          console.log(token)
-          res.status(200).json({message: `${user.username} is logged in!`, token,})
+          res.status(200).json({message: `${user.username} is logged in!`, token, id:` ${user.id}`, org: `${user.org_id}`})
         } else {
           res.status(400).json({message: "Invalid username or password"})
         }
@@ -38,7 +37,7 @@ router.post('/login', (req, res) =>{
       })
 });
 
-router.get('/user', Restricted, (req, res) =>{
+router.get('/user', (req, res) =>{
   Users.find()
     .then(user =>{
       res.status(200).json(user)

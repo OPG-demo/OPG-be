@@ -47,7 +47,7 @@ router.put('/:id', (req, res) =>{
     }
   })
   .catch(err =>{
-    res.status(500).json({message: "Could not update objective"})
+    res.status(500).json({message: "Could not update objective"},err)
   })
 })
 
