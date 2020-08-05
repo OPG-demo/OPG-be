@@ -37,6 +37,20 @@ router.get('/:id', (req, res) =>{
     })
 })
 
+router.get('/org/:org_id', (req, res) =>{
+  Iksf.findByOrg(req.params.org_id)
+    .then(iksf =>{
+      if (iksf) {
+        res.json(iksf)
+      } else {
+        res.status(404).json({message: "The iksf associated with this org does not exist"})
+      }
+    })
+    .catch(err =>{
+      res.status(500).json({message: "Could not get iksf"})
+    })
+})
+
 router.put('/:id', (req, res) =>{
   Iksf.update(req.body, req.params.id)
   .then(iksf =>{

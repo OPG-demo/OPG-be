@@ -61,6 +61,20 @@ router.get('/user/:id', (req, res) =>{
     })
 })
 
+router.get('/user/org/:org_id', (req, res) =>{
+  Users.findByOrg(req.params.org_id)
+    .then(user =>{
+      if (user) {
+        res.json(user)
+      } else {
+        res.status(404).json({message: "The user associated with that org does not exist"})
+      }
+    })
+    .catch(err =>{
+      res.status(500).json({message: "Could not get user"})
+    })
+})
+
 router.put('/user/:id', (req, res) =>{
   Users.update(req.body, req.params.id)
   .then(user =>{

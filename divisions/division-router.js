@@ -37,6 +37,20 @@ router.get('/:id', (req, res) =>{
     })
 })
 
+router.get('/org/:org_id', (req, res) =>{
+  Division.findByOrg(req.params.org_id)
+    .then(division =>{
+      if (division) {
+        res.json(division)
+      } else {
+        res.status(404).json({message: "The division associated with this org does not exist"})
+      }
+    })
+    .catch(err =>{
+      res.status(500).json({message: "Could not get division"})
+    })
+})
+
 router.put('/:id', (req, res) =>{
   Division.update(req.body, req.params.id)
   .then(division =>{

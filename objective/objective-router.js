@@ -37,6 +37,20 @@ router.get('/:id', (req, res) =>{
     })
 })
 
+router.get('/org/:org_id', (req, res) =>{
+  Objective.findByOrg(req.params.org_id)
+    .then(objective =>{
+      if (objective) {
+        res.json(objective)
+      } else {
+        res.status(404).json({message: "The objective associated with that org does not exist"})
+      }
+    })
+    .catch(err =>{
+      res.status(500).json({message: "Could not get objective"})
+    })
+})
+
 router.put('/:id', (req, res) =>{
   Objective.update(req.body, req.params.id)
   .then(objective =>{

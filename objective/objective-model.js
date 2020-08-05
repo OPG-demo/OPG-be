@@ -5,6 +5,7 @@ module.exports = {
   find,
   findBy,
   findById,
+  findByOrg,
   remove,
   update
 };
@@ -27,6 +28,12 @@ function findById(id) {
     .where({id})
     .first();
 }
+
+function findByOrg(org_id) {
+  return db('objective')
+    .where({org_id})
+}
+
 
 function remove(id){
   return db('objective')

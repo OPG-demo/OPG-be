@@ -37,6 +37,20 @@ router.get('/:id', (req, res) =>{
     })
 })
 
+router.get('/org/:org_id', (req, res) =>{
+  Corecomp.findByOrg(req.params.org_id)
+  .then(corecomp =>{
+    if(corecomp){
+      res.json(corecomp)
+    } else {
+      res.status(404).json({message: "The corecomp associated with that org does not exist"})
+    }
+  })
+  .catch(err =>{
+    res.status(500).json({message: "Could not get corecomp"})
+  })
+})
+
 router.put('/:id', (req, res) =>{
   Corecomp.update(req.body, req.params.id)
   .then(corecomp =>{
